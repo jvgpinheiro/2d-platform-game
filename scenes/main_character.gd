@@ -11,12 +11,17 @@ var currentJumps = 0
 
 
 func _physics_process(delta):
-	handleMovement(delta)
-	chooseAnimation()
-	chooseAnimationDirection()
+	handle_global_actions()
+	handle_movement(delta)
+	choose_animation()
+	choose_animation_direction()
 	move_and_slide()
-	
-func handleMovement(delta):
+
+func handle_global_actions():
+	if Input.is_action_just_pressed("reset"):
+		get_tree().reload_current_scene()
+
+func handle_movement(delta):
 	if is_on_floor():
 		currentJumps = 0
 	else:
@@ -36,7 +41,7 @@ func handleMovement(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, 35)
 
-func chooseAnimation():
+func choose_animation():
 	if abs(velocity.x) > 1 and is_on_floor():
 		sprite_2d.play("running")
 	elif is_on_floor():
@@ -49,7 +54,7 @@ func chooseAnimation():
 		sprite_2d.play('double_jumping')
 	
 
-func chooseAnimationDirection():
+func choose_animation_direction():
 	var isLeft = velocity.x < 0
 	if velocity.x == 0:
 		isLeft = sprite_2d.flip_h

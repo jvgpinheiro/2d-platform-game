@@ -24,6 +24,7 @@ func get_formatted_time_elapsed():
 	var padded_seconds = "%02d" % seconds
 	var padded_minutes = "%02d" % minutes
 	var padded_hours = "%02d" % hours
+	
 	if not hours:
 		return padded_minutes + ":" + padded_seconds
 	return padded_hours + ":" + padded_minutes + ":" + padded_seconds

@@ -11,7 +11,7 @@ func _ready():
 
 
 func _on_body_entered(body):
-	if not isDestroying and body.name == 'Frog_MC':
+	if not isDestroying and body.name == 'FrogMC':
 		isDestroying = true
 		game_manager.add_point()
 		sprite_2d.play("collected")

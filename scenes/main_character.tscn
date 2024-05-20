@@ -255,7 +255,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lv3ho"]
 size = Vector2(57, 75)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="FrogMC" type="CharacterBody2D"]
 script = ExtResource("1_6ygkx")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
