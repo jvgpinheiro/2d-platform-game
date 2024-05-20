@@ -1,7 +1,9 @@
 extends Node
 
-signal on_max_points_changed(max_points)
-signal on_points_changed(points)
+signal on_max_points_changed(max_points: float)
+signal on_points_changed(points: float)
+signal on_total_time_elapsed_change(time_elapsed: float, formatted_time_elapsed: String)
+signal on_scene_time_elapsed_change(time_elapsed: float, formatted_time_elapsed: String)
 
 var points = 0
 var max_points = 0
@@ -32,6 +34,10 @@ func get_points():
 
 func update_total_time_elapsed(time):
 	total_time_elapsed = time
+	on_total_time_elapsed_change.emit(
+		get_total_time_elapsed(),
+		get_formatted_total_time_elapsed()
+	)
 
 func get_total_time_elapsed():
 	return total_time_elapsed
@@ -42,6 +48,10 @@ func get_formatted_total_time_elapsed():
 
 func update_scene_time_elapsed(time):
 	scene_time_elapsed = time
+	on_scene_time_elapsed_change.emit(
+		get_scene_time_elapsed(),
+		get_formatted_scene_time_elapsed()
+	)
 
 func get_scene_time_elapsed():
 	return scene_time_elapsed
@@ -67,3 +77,7 @@ func on_scene_reset():
 	update_scene_time_elapsed(0)
 	reset_max_points()
 	reset_points()
+
+
+func _on_on_scene_time_elapsed_change(time_elapsed, formatted_time_elapsed):
+	pass # Replace with function body.

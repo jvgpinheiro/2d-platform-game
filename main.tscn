@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dm7r8j3go3gnw"]
+[gd_scene load_steps=12 format=3 uid="uid://dm7r8j3go3gnw"]
 
 [ext_resource type="Texture2D" uid="uid://b538hu4e1qf7d" path="res://Green.png" id="1_ru2ku"]
 [ext_resource type="Texture2D" uid="uid://rop2et5gu55l" path="res://Terrain (16x16).png" id="2_5up2i"]
@@ -7,9 +7,7 @@
 [ext_resource type="Script" path="res://game_manager/fake_scene_timer.gd" id="3_wohdg"]
 [ext_resource type="PackedScene" uid="uid://bs136v7ule683" path="res://scenes/cherry.tscn" id="4_bayay"]
 [ext_resource type="Script" path="res://game_manager.gd" id="5_as1b3"]
-[ext_resource type="Script" path="res://scenes/panel_timer_label.gd" id="8_rvrel"]
-[ext_resource type="Script" path="res://scenes/panel_score_label.gd" id="9_upyh5"]
-[ext_resource type="Texture2D" uid="uid://do4rekagc4c0c" path="res://Cherries.png" id="10_7kw1o"]
+[ext_resource type="PackedScene" uid="uid://i12jx2k7s6ho" path="res://scenes/score_panel.tscn" id="8_nnb78"]
 
 [sub_resource type="GDScript" id="GDScript_foxnp"]
 script/source = "extends Node
@@ -775,21 +773,6 @@ physics_layer_0/collision_layer = 1
 physics_layer_1/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_xy4ks")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_btvq6"]
-atlas = ExtResource("10_7kw1o")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_kns1x"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_btvq6")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [node name="Node" type="Node"]
 
 [node name="GameManager" type="Node" parent="."]
@@ -874,38 +857,9 @@ position = Vector2(2109, 424)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ScorePanel" type="Panel" parent="UI"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 192.0
-offset_bottom = 72.0
+[node name="ScorePanel2" parent="UI" instance=ExtResource("8_nnb78")]
 
-[node name="PanelTimerLabel" type="Label" parent="UI/ScorePanel"]
-layout_mode = 0
-offset_left = 112.0
-offset_right = 176.0
-offset_bottom = 64.0
-text = "00:00"
-horizontal_alignment = 2
-vertical_alignment = 1
-script = ExtResource("8_rvrel")
-
-[node name="PanelScoreLabel" type="Label" parent="UI/ScorePanel"]
-layout_mode = 0
-offset_left = 8.0
-offset_right = 56.0
-offset_bottom = 64.0
-text = "0/0"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("9_upyh5")
-
-[node name="Node2D" type="Node2D" parent="UI/ScorePanel"]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/ScorePanel/Node2D"]
-position = Vector2(72, 32)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_kns1x")
-
-[connection signal="on_max_points_changed" from="GameManager" to="UI/ScorePanel/PanelScoreLabel" method="_on_game_manager_on_max_points_changed"]
-[connection signal="on_points_changed" from="GameManager" to="UI/ScorePanel/PanelScoreLabel" method="_on_game_manager_on_points_changed"]
+[connection signal="on_max_points_changed" from="GameManager" to="UI/ScorePanel2" method="_on_game_manager_on_max_points_changed"]
+[connection signal="on_points_changed" from="GameManager" to="UI/ScorePanel2" method="_on_game_manager_on_points_changed"]
+[connection signal="on_scene_time_elapsed_change" from="GameManager" to="UI/ScorePanel2" method="_on_game_manager_on_scene_time_elapsed_change"]
+[connection signal="on_total_time_elapsed_change" from="GameManager" to="UI/ScorePanel2" method="_on_game_manager_on_total_time_elapsed_change"]

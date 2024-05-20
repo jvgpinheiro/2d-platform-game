@@ -1,7 +1,5 @@
 extends Label
 
-@onready var game_manager = %GameManager
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	text = game_manager.get_formatted_scene_time_elapsed()
+func _on_score_panel_scene_time_elapsed_change(time_elapsed, formatted_time_elapsed):
+	text = formatted_time_elapsed
