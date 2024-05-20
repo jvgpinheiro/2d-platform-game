@@ -4,11 +4,11 @@ extends CharacterBody2D
 const SPEED = 500.0
 const JUMP_VELOCITY = -800.0
 @onready var sprite_2d = $Sprite2D
+@onready var game_manager = %GameManager
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var currentJumps = 0
-
 
 func _physics_process(delta):
 	handle_global_actions()
@@ -20,6 +20,7 @@ func _physics_process(delta):
 func handle_global_actions():
 	if Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
+		game_manager.on_scene_reset()
 
 func handle_movement(delta):
 	if is_on_floor():

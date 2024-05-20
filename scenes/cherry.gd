@@ -8,6 +8,7 @@ var isDestroying = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	sprite_2d.play('idle')
+	game_manager.add_max_points()
 
 
 func _on_body_entered(body):
