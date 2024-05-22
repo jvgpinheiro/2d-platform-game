@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var sprite_2d = $Sprite2D
 @onready var label = $Label
-@onready var game_manager = %GameManager
 
 const rating_img_path_dictionary = {
 	1: "res://One Star.png",
@@ -13,7 +12,7 @@ const rating_img_path_dictionary = {
 }
 
 
-func _on_game_manager_scene_finished(result):
-	var path = rating_img_path_dictionary[result.stars_rating]
+func display_rating(scene_result):
+	var path = rating_img_path_dictionary[scene_result.stars_rating]
 	sprite_2d.texture = load(path)
-	label.text = game_manager.get_formatted_scene_time_elapsed()
+	label.text = scene_result.formatted_scene_time_elapsed

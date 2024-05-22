@@ -19,3 +19,7 @@ func _on_game_manager_on_total_time_elapsed_change(time_elapsed, formatted_time_
 
 func _on_game_manager_on_scene_time_elapsed_change(time_elapsed, formatted_time_elapsed):
 	scene_time_elapsed_change.emit(time_elapsed, formatted_time_elapsed)
+
+
+func _on_game_manager_scene_finished(result):
+	visible = false

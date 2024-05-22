@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dm7r8j3go3gnw"]
+[gd_scene load_steps=14 format=3 uid="uid://dm7r8j3go3gnw"]
 
 [ext_resource type="Texture2D" uid="uid://b538hu4e1qf7d" path="res://Green.png" id="1_ru2ku"]
 [ext_resource type="Texture2D" uid="uid://rop2et5gu55l" path="res://Terrain (16x16).png" id="2_5up2i"]
@@ -8,12 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bs136v7ule683" path="res://scenes/cherry.tscn" id="4_bayay"]
 [ext_resource type="Script" path="res://game_manager.gd" id="5_as1b3"]
 [ext_resource type="PackedScene" uid="uid://i12jx2k7s6ho" path="res://scenes/score_panel.tscn" id="8_nnb78"]
-[ext_resource type="Script" path="res://scenes/game_over_panel.gd" id="9_oiqgk"]
-[ext_resource type="Texture2D" uid="uid://qucedk217bit" path="res://End (Idle).png" id="10_inq2y"]
-[ext_resource type="Script" path="res://scenes/trophy.gd" id="10_l5y1e"]
-[ext_resource type="Texture2D" uid="uid://cse8d1huypnc8" path="res://End (Pressed) (64x64).png" id="11_g03sq"]
-[ext_resource type="Script" path="res://scenes/rating.gd" id="13_csvju"]
-[ext_resource type="Texture2D" uid="uid://xgg7txt1salr" path="res://Five Stars.png" id="14_f0jht"]
+[ext_resource type="PackedScene" uid="uid://bo0yfxoqc5kxu" path="res://scenes/scene_over_panel.tscn" id="9_ehigv"]
 
 [sub_resource type="GDScript" id="GDScript_foxnp"]
 script/source = "extends Node
@@ -779,81 +774,8 @@ physics_layer_0/collision_layer = 1
 physics_layer_1/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_xy4ks")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0aamw"]
-atlas = ExtResource("11_g03sq")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_km8bv"]
-atlas = ExtResource("11_g03sq")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nphif"]
-atlas = ExtResource("11_g03sq")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7a2tp"]
-atlas = ExtResource("11_g03sq")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fbyo3"]
-atlas = ExtResource("11_g03sq")
-region = Rect2(256, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_aq5oo"]
-atlas = ExtResource("11_g03sq")
-region = Rect2(320, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sqmeb"]
-atlas = ExtResource("11_g03sq")
-region = Rect2(384, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_14351"]
-atlas = ExtResource("11_g03sq")
-region = Rect2(448, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ofotg"]
-atlas = ExtResource("10_inq2y")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2v6qo"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0aamw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_km8bv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nphif")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7a2tp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fbyo3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_aq5oo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sqmeb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_14351")
-}],
-"loop": true,
-"name": &"complete",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ofotg")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 20.0
-}]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_io6mg"]
+bg_color = Color(0.0980392, 0.0784314, 0.156863, 0.784314)
 
 [node name="Node" type="Node"]
 
@@ -949,46 +871,8 @@ position = Vector2(2109, 424)
 
 [node name="ScorePanel" parent="UI" instance=ExtResource("8_nnb78")]
 
-[node name="GameOverPanel" type="Panel" parent="UI"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("9_oiqgk")
-
-[node name="Trophy" type="Node2D" parent="UI/GameOverPanel"]
-position = Vector2(632, 140)
-script = ExtResource("10_l5y1e")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/GameOverPanel/Trophy"]
-position = Vector2(0, -32)
-scale = Vector2(3.25, 3.25)
-sprite_frames = SubResource("SpriteFrames_2v6qo")
-animation = &"complete"
-frame_progress = 0.579719
-
-[node name="Rating" type="Node2D" parent="UI/GameOverPanel"]
-position = Vector2(628, 480)
-script = ExtResource("13_csvju")
-
-[node name="Sprite2D" type="Sprite2D" parent="UI/GameOverPanel/Rating"]
-position = Vector2(0, 32)
-scale = Vector2(0.150146, 0.150146)
-texture = ExtResource("14_f0jht")
-
-[node name="Label" type="Label" parent="UI/GameOverPanel/Rating"]
-offset_left = -48.0
-offset_top = -48.0
-offset_right = 48.0
-offset_bottom = -6.0
-size_flags_horizontal = 6
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 30
-text = "00:00"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="SceneOverPanel" parent="UI" instance=ExtResource("9_ehigv")]
+theme_override_styles/panel = SubResource("StyleBoxFlat_io6mg")
 
 [connection signal="on_max_points_changed" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_max_points_changed"]
 [connection signal="on_points_changed" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_points_changed"]
@@ -996,8 +880,7 @@ vertical_alignment = 1
 [connection signal="on_total_time_elapsed_change" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_total_time_elapsed_change"]
 [connection signal="paused" from="GameManager" to="Main Scene/FrogMC" method="_on_game_manager_paused"]
 [connection signal="resumed" from="GameManager" to="Main Scene/FrogMC" method="_on_game_manager_resumed"]
-[connection signal="scene_finished" from="GameManager" to="UI/GameOverPanel" method="_on_game_manager_scene_finished"]
-[connection signal="scene_finished" from="GameManager" to="UI/GameOverPanel/Trophy" method="_on_game_manager_scene_finished"]
-[connection signal="scene_finished" from="GameManager" to="UI/GameOverPanel/Rating" method="_on_game_manager_scene_finished"]
+[connection signal="scene_finished" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_scene_finished"]
+[connection signal="scene_finished" from="GameManager" to="UI/SceneOverPanel" method="_on_game_manager_scene_finished"]
 [connection signal="timeout" from="GameManager/FinishedSceneTimer" to="GameManager" method="_on_finished_scene_timer_timeout"]
 [connection signal="timeout" from="GameManager/FinishedGameTimer" to="GameManager" method="_on_finished_game_timer_timeout"]

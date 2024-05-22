@@ -117,7 +117,9 @@ func finish_scene():
 		"max_points": max_points,
 		"points": points,
 		"scene_time_elapsed": scene_time_elapsed,
+		"formatted_scene_time_elapsed": get_formatted_scene_time_elapsed(),
 		"accumlated_time_elapsed": total_time_elapsed,
+		"formatted_total_time_elapsed": get_formatted_total_time_elapsed(),
 		"stars_rating": stars_rating,
 	}
 	finished_scenes_results.push_back(result)
@@ -140,6 +142,7 @@ func get_scene_star_rating():
 
 
 func finish_game():
+	isFinished = true
 	#Game finish delayed timer
 	finished_game_timer.start()
 
@@ -158,6 +161,5 @@ func _on_finished_scene_timer_timeout():
 
 
 func _on_finished_game_timer_timeout():
-	isFinished = true
 	pause()
 	game_finished.emit(finished_scenes_results)
