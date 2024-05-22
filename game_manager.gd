@@ -112,16 +112,31 @@ func finish_scene():
 	if isFinished:
 		return
 	var accumlated_time_elapsed = total_time_elapsed
+	var stars_rating = get_scene_star_rating()
 	var result = {
-		max_points: max_points,
-		points: points,
-		scene_time_elapsed: scene_time_elapsed,
-		accumlated_time_elapsed: total_time_elapsed,
+		"max_points": max_points,
+		"points": points,
+		"scene_time_elapsed": scene_time_elapsed,
+		"accumlated_time_elapsed": total_time_elapsed,
+		"stars_rating": stars_rating,
 	}
 	finished_scenes_results.push_back(result)
 	#Scene finish delayed timer
 	finished_scene_timer.start()
 	finish_game()
+
+
+func get_scene_star_rating():
+	var safe_time = round(scene_time_elapsed)
+	if safe_time <= 21:
+		return 5
+	if safe_time <= 27:
+		return 4
+	if safe_time <= 35:
+		return 3
+	if safe_time <= 48:
+		return 2
+	return 1
 
 
 func finish_game():
