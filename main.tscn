@@ -835,7 +835,7 @@ position = Vector2(1133, 63)
 position = Vector2(1464, 59)
 
 [node name="Cherry3" parent="Main Scene/Cherries" instance=ExtResource("4_bayay")]
-position = Vector2(49, 524)
+position = Vector2(48, 464)
 
 [node name="Cherry4" parent="Main Scene/Cherries" instance=ExtResource("4_bayay")]
 position = Vector2(1028, 186)
@@ -872,6 +872,7 @@ position = Vector2(2109, 424)
 [node name="ScorePanel" parent="UI" instance=ExtResource("8_nnb78")]
 
 [node name="SceneOverPanel" parent="UI" instance=ExtResource("9_ehigv")]
+visible = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_io6mg")
 
 [connection signal="on_max_points_changed" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_max_points_changed"]

@@ -130,13 +130,13 @@ func finish_scene():
 
 func get_scene_star_rating():
 	var safe_time = round(scene_time_elapsed)
-	if safe_time <= 21:
+	if safe_time <= 20:
 		return 5
 	if safe_time <= 27:
 		return 4
-	if safe_time <= 35:
+	if safe_time <= 38:
 		return 3
-	if safe_time <= 48:
+	if safe_time <= 52:
 		return 2
 	return 1
 

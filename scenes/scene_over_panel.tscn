@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bo0yfxoqc5kxu"]
+[gd_scene load_steps=21 format=3 uid="uid://bo0yfxoqc5kxu"]
 
 [ext_resource type="Script" path="res://scenes/scene_over_panel.gd" id="1_dmugi"]
 [ext_resource type="Script" path="res://scenes/trophy.gd" id="2_1hcxi"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://qucedk217bit" path="res://End (Idle).png" id="4_7s45r"]
 [ext_resource type="Script" path="res://scenes/rating.gd" id="5_h7bf7"]
 [ext_resource type="Texture2D" uid="uid://xgg7txt1salr" path="res://Five Stars.png" id="6_c0ffg"]
+[ext_resource type="Texture2D" uid="uid://dmtex73v7tik0" path="res://One Star.png" id="7_8ldum"]
+[ext_resource type="Texture2D" uid="uid://d8hs33gpuwjp" path="res://Two Stars.png" id="8_uo4r2"]
+[ext_resource type="Texture2D" uid="uid://cbqpe5kvx1jos" path="res://Three Stars.png" id="9_76q4m"]
+[ext_resource type="Texture2D" uid="uid://b5w7723ciwvb" path="res://Four Stars.png" id="10_uvp1x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0aamw"]
 atlas = ExtResource("3_67ox3")
@@ -84,7 +88,6 @@ animations = [{
 }]
 
 [node name="SceneOverPanel" type="Panel"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -122,4 +125,97 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 30
 text = "00:00"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RatingsPerTimeList" type="Node2D" parent="."]
+
+[node name="FiveStarsTimeRating" type="Node2D" parent="RatingsPerTimeList"]
+position = Vector2(1192, 40)
+
+[node name="Sprite2D" type="Sprite2D" parent="RatingsPerTimeList/FiveStarsTimeRating"]
+scale = Vector2(0.046, 0.046)
+texture = ExtResource("6_c0ffg")
+
+[node name="Label" type="Label" parent="RatingsPerTimeList/FiveStarsTimeRating"]
+offset_left = -96.0
+offset_top = -8.0
+offset_right = -50.0
+offset_bottom = 9.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+text = "00:20"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="FourStarsTimeRating" type="Node2D" parent="RatingsPerTimeList"]
+position = Vector2(1192, 64)
+
+[node name="Sprite2D" type="Sprite2D" parent="RatingsPerTimeList/FourStarsTimeRating"]
+scale = Vector2(0.046, 0.046)
+texture = ExtResource("10_uvp1x")
+
+[node name="Label" type="Label" parent="RatingsPerTimeList/FourStarsTimeRating"]
+offset_left = -96.0
+offset_top = -8.0
+offset_right = -50.0
+offset_bottom = 9.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+text = "00:27"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ThreeStarsTimeRating" type="Node2D" parent="RatingsPerTimeList"]
+position = Vector2(1192, 88)
+
+[node name="Sprite2D" type="Sprite2D" parent="RatingsPerTimeList/ThreeStarsTimeRating"]
+scale = Vector2(0.046, 0.046)
+texture = ExtResource("9_76q4m")
+
+[node name="Label" type="Label" parent="RatingsPerTimeList/ThreeStarsTimeRating"]
+offset_left = -96.0
+offset_top = -8.0
+offset_right = -50.0
+offset_bottom = 9.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+text = "00:38"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TwoStarsTimeRating" type="Node2D" parent="RatingsPerTimeList"]
+position = Vector2(1192, 112)
+
+[node name="Sprite2D" type="Sprite2D" parent="RatingsPerTimeList/TwoStarsTimeRating"]
+scale = Vector2(0.046, 0.046)
+texture = ExtResource("8_uo4r2")
+
+[node name="Label" type="Label" parent="RatingsPerTimeList/TwoStarsTimeRating"]
+offset_left = -96.0
+offset_top = -8.0
+offset_right = -50.0
+offset_bottom = 9.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+text = "00:52"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="OneStarTimeRating" type="Node2D" parent="RatingsPerTimeList"]
+position = Vector2(1192, 136)
+
+[node name="Sprite2D" type="Sprite2D" parent="RatingsPerTimeList/OneStarTimeRating"]
+position = Vector2(-1.52588e-05, -3.8147e-06)
+scale = Vector2(0.0462428, 0.0462428)
+texture = ExtResource("7_8ldum")
+
+[node name="Label" type="Label" parent="RatingsPerTimeList/OneStarTimeRating"]
+offset_left = -96.0
+offset_top = -8.0
+offset_right = -50.0
+offset_bottom = 9.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+text = "Finish"
+horizontal_alignment = 2
 vertical_alignment = 1
