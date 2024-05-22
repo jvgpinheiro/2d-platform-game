@@ -8,6 +8,8 @@ signal scene_finished(result: Dictionary)
 signal game_finished(results: Array[Dictionary])
 signal paused()
 signal resumed()
+signal game_saved()
+signal game_loaded(data: Dictionary)
 
 @onready var finished_scene_timer = $FinishedSceneTimer
 @onready var finished_game_timer = $FinishedGameTimer
@@ -19,6 +21,12 @@ var isFinished = false
 var isPaused = false
 var finished_scenes_results = []
 var pausable_group_name = "pausable"
+var personal_best = INF
+var save_game_dir_path = 'res://saves/'
+var save_game_path = save_game_dir_path + '/save_game.save'
+
+func _ready():
+	load_game()
 
 func add_max_points():
 	if isFinished:
@@ -113,6 +121,7 @@ func finish_scene():
 		return
 	var accumlated_time_elapsed = total_time_elapsed
 	var stars_rating = get_scene_star_rating()
+	var is_new_personal_best = is_inf(personal_best) || scene_time_elapsed < personal_best
 	var result = {
 		"max_points": max_points,
 		"points": points,
@@ -121,11 +130,15 @@ func finish_scene():
 		"accumlated_time_elapsed": total_time_elapsed,
 		"formatted_total_time_elapsed": get_formatted_total_time_elapsed(),
 		"stars_rating": stars_rating,
+		"is_new_personal_best": is_new_personal_best
 	}
 	finished_scenes_results.push_back(result)
 	#Scene finish delayed timer
 	finished_scene_timer.start()
 	finish_game()
+	if is_new_personal_best:
+		personal_best = scene_time_elapsed
+		save_game()
 
 
 func get_scene_star_rating():
@@ -152,6 +165,35 @@ func reset_game():
 	update_scene_time_elapsed(0)
 	reset_max_points()
 	reset_points()
+
+
+func save_game():
+	var save_data = {
+		"personal_best": personal_best
+	}
+	if not DirAccess.dir_exists_absolute(save_game_dir_path):
+		DirAccess.make_dir_absolute(save_game_dir_path)
+	var save_game = FileAccess.open(save_game_path, FileAccess.WRITE)
+	var json_save_data = JSON.stringify(save_data)
+	save_game.store_line(json_save_data)
+	save_game.close()
+	game_saved.emit()
+
+
+func load_game():
+	if not FileAccess.file_exists(save_game_path):
+		return
+	var save_game = FileAccess.open(save_game_path, FileAccess.READ)
+	var json_string = save_game.get_line()
+	var json = JSON.new()
+	var parse_result = json.parse(json_string)
+	if parse_result != OK:
+		return
+	var save_data = json.get_data()
+	if save_data.personal_best:
+		personal_best = save_data.personal_best
+	save_game.close()
+	game_loaded.emit(save_data)
 
 
 func _on_finished_scene_timer_timeout():
