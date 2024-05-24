@@ -880,6 +880,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_io6mg")
 [connection signal="on_scene_time_elapsed_change" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_scene_time_elapsed_change"]
 [connection signal="on_total_time_elapsed_change" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_total_time_elapsed_change"]
 [connection signal="paused" from="GameManager" to="Main Scene/FrogMC" method="_on_game_manager_paused"]
+[connection signal="personal_best_updated" from="GameManager" to="UI/SceneOverPanel" method="_on_game_manager_personal_best_updated"]
 [connection signal="resumed" from="GameManager" to="Main Scene/FrogMC" method="_on_game_manager_resumed"]
 [connection signal="scene_finished" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_scene_finished"]
 [connection signal="scene_finished" from="GameManager" to="UI/SceneOverPanel" method="_on_game_manager_scene_finished"]

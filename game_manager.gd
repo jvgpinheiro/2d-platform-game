@@ -10,6 +10,7 @@ signal paused()
 signal resumed()
 signal game_saved()
 signal game_loaded(data: Dictionary)
+signal personal_best_updated(data: Dictionary)
 
 @onready var finished_scene_timer = $FinishedSceneTimer
 @onready var finished_game_timer = $FinishedGameTimer
@@ -120,8 +121,12 @@ func finish_scene():
 	if isFinished:
 		return
 	var accumlated_time_elapsed = total_time_elapsed
-	var stars_rating = get_scene_star_rating()
+	var stars_rating = get_scene_star_rating(scene_time_elapsed)
 	var is_new_personal_best = is_inf(personal_best) || scene_time_elapsed < personal_best
+	if is_new_personal_best:
+		personal_best = scene_time_elapsed
+		personal_best_updated.emit()
+		save_game()
 	var result = {
 		"max_points": max_points,
 		"points": points,
@@ -130,7 +135,10 @@ func finish_scene():
 		"accumlated_time_elapsed": total_time_elapsed,
 		"formatted_total_time_elapsed": get_formatted_total_time_elapsed(),
 		"stars_rating": stars_rating,
-		"is_new_personal_best": is_new_personal_best
+		"is_new_personal_best": is_new_personal_best,
+		"personal_best": personal_best,
+		"formatted_personal_best": format_time_elapsed(personal_best),
+		"personal_best_stars_rating": get_scene_star_rating(personal_best)
 	}
 	finished_scenes_results.push_back(result)
 	#Scene finish delayed timer
@@ -138,11 +146,12 @@ func finish_scene():
 	finish_game()
 	if is_new_personal_best:
 		personal_best = scene_time_elapsed
+		personal_best_updated.emit()
 		save_game()
 
 
-func get_scene_star_rating():
-	var safe_time = round(scene_time_elapsed)
+func get_scene_star_rating(time):
+	var safe_time = round(time)
 	if safe_time <= 20:
 		return 5
 	if safe_time <= 27:
@@ -192,6 +201,7 @@ func load_game():
 	var save_data = json.get_data()
 	if save_data.personal_best:
 		personal_best = save_data.personal_best
+		personal_best_updated.emit()
 	save_game.close()
 	game_loaded.emit(save_data)
 

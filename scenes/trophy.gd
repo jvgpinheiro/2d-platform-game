@@ -11,5 +11,5 @@ func _process(delta):
 	sprite_2d.play(animation_name)
 
 
-func _on_game_manager_scene_finished(result):
+func trophy_enter_animation():
 	animation_name = 'complete'
