@@ -23,7 +23,7 @@ var isPaused = false
 var finished_scenes_results = []
 var pausable_group_name = "pausable"
 var personal_best = INF
-var save_game_dir_path = 'res://saves/'
+var save_game_dir_path = 'user://saves/'
 var save_game_path = save_game_dir_path + '/save_game.save'
 
 func _ready():
