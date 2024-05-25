@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bo0yfxoqc5kxu"]
+[gd_scene load_steps=26 format=3 uid="uid://bo0yfxoqc5kxu"]
 
 [ext_resource type="Script" path="res://scenes/scene_over_panel.gd" id="1_dmugi"]
 [ext_resource type="Script" path="res://scenes/trophy.gd" id="2_1hcxi"]
@@ -88,6 +88,35 @@ animations = [{
 "name": &"idle",
 "speed": 20.0
 }]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6d2x"]
+bg_color = Color(0.0784314, 0.0784314, 0.0980392, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0.0784314, 0.784314)
+shadow_size = 1
+anti_aliasing_size = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kbo5s"]
+bg_color = Color(0.0862745, 0.0862745, 0.109804, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0.0784314, 0.784314)
+shadow_size = 1
+anti_aliasing_size = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l64m8"]
+bg_color = Color(0.0980392, 0.0980392, 0.133333, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 1
+anti_aliasing_size = 2.0
 
 [node name="SceneOverPanel" type="Panel"]
 anchors_preset = 15
@@ -255,7 +284,7 @@ animation = &"complete"
 frame_progress = 0.579719
 
 [node name="Rating" type="Node2D" parent="CenterControl"]
-position = Vector2(20, 176)
+position = Vector2(20, 160)
 script = ExtResource("5_h7bf7")
 
 [node name="TimeLabel" type="Label" parent="CenterControl/Rating"]
@@ -297,4 +326,61 @@ script = ExtResource("7_noog3")
 wait_time = 0.5
 one_shot = true
 
+[node name="BottomControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="RestartButton" type="Button" parent="BottomControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -44.0
+offset_right = -24.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_t6d2x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kbo5s")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l64m8")
+toggle_mode = true
+text = "RESTART"
+
+[node name="ExitButton" type="Button" parent="BottomControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -44.0
+offset_right = 176.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_t6d2x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kbo5s")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l64m8")
+toggle_mode = true
+text = "EXIT"
+
 [connection signal="timeout" from="CenterControl/Rating/NewRecordLabel/Timer" to="CenterControl/Rating/NewRecordLabel" method="_on_timer_timeout"]
+[connection signal="pressed" from="BottomControl/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="BottomControl/ExitButton" to="." method="_on_exit_button_pressed"]

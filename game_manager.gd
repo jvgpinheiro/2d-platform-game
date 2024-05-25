@@ -18,7 +18,7 @@ var points = 0
 var max_points = 0
 var total_time_elapsed = 0
 var scene_time_elapsed = 0
-var isFinished = false
+var is_finished = false
 var isPaused = false
 var finished_scenes_results = []
 var pausable_group_name = "pausable"
@@ -27,17 +27,30 @@ var save_game_dir_path = 'user://saves/'
 var save_game_path = save_game_dir_path + '/save_game.save'
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	disable_mouse()
 	load_game()
 
+
+func is_game_finished():
+	return 
+
+
+func enable_mouse():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func disable_mouse():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+
 func add_max_points():
-	if isFinished:
+	if is_finished:
 		return
 	max_points += 1
 	on_max_points_changed.emit(max_points)
 
 func reset_max_points():
-	if isFinished:
+	if is_finished:
 		return
 	max_points = 0
 	on_max_points_changed.emit(max_points)
@@ -46,7 +59,7 @@ func get_max_points():
 	return max_points
 
 func add_point():
-	if isFinished:
+	if is_finished:
 		return
 	points += 1
 	on_points_changed.emit(points)
@@ -54,7 +67,7 @@ func add_point():
 		finish_scene()
 
 func reset_points():
-	if isFinished:
+	if is_finished:
 		return
 	points = 0
 	on_points_changed.emit(points)
@@ -63,7 +76,7 @@ func get_points():
 	return points
 
 func update_total_time_elapsed(time):
-	if isFinished:
+	if is_finished:
 		return
 	total_time_elapsed = time
 	on_total_time_elapsed_change.emit(
@@ -79,7 +92,7 @@ func get_formatted_total_time_elapsed():
 	return format_time_elapsed(time)
 
 func update_scene_time_elapsed(time):
-	if isFinished:
+	if is_finished:
 		return
 	scene_time_elapsed = time
 	on_scene_time_elapsed_change.emit(
@@ -111,15 +124,17 @@ func format_time_elapsed(time):
 func pause():
 	paused.emit()
 	get_tree().call_group(pausable_group_name, "_on_game_manager_paused")
+	enable_mouse()
 
 
 func resume():
 	resumed.emit()
 	get_tree().call_group(pausable_group_name, "_on_game_manager_resumed")
+	disable_mouse()
 
 
 func finish_scene():
-	if isFinished:
+	if is_finished:
 		return
 	var accumlated_time_elapsed = total_time_elapsed
 	var stars_rating = get_scene_star_rating(scene_time_elapsed)
@@ -165,13 +180,14 @@ func get_scene_star_rating(time):
 
 
 func finish_game():
-	isFinished = true
+	is_finished = true
 	#Game finish delayed timer
 	finished_game_timer.start()
 
 
 func reset_game():
-	isFinished = false
+	get_tree().reload_current_scene()
+	is_finished = false
 	update_scene_time_elapsed(0)
 	reset_max_points()
 	reset_points()
@@ -205,6 +221,10 @@ func load_game():
 		personal_best_updated.emit()
 	save_game.close()
 	game_loaded.emit(save_data)
+
+
+func quit():
+	get_tree().quit()
 
 
 func _on_finished_scene_timer_timeout():

@@ -23,11 +23,9 @@ func _physics_process(delta):
 
 func handle_global_actions():
 	if Input.is_action_just_pressed("reset"):
-		get_tree().reload_current_scene()
 		game_manager.reset_game()
 	elif Input.is_action_just_pressed('finish_scene'):
-		game_manager
-		#game_manager.finish_scene()
+		game_manager.finish_scene()
 	elif Input.is_action_just_pressed('pause'):
 		game_manager.pause()
 	elif Input.is_action_just_pressed('resume'):

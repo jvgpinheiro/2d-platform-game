@@ -27,8 +27,13 @@ offset_right = 200.0
 offset_bottom = 80.0
 script = ExtResource("1_uopmk")
 
-[node name="PanelTimerLabel" type="Label" parent="."]
-layout_mode = 0
+[node name="TopLeftControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelTimerLabel" type="Label" parent="TopLeftControl"]
 offset_left = 112.0
 offset_right = 176.0
 offset_bottom = 64.0
@@ -37,8 +42,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 script = ExtResource("1_uv4wk")
 
-[node name="PanelScoreLabel" type="Label" parent="."]
-layout_mode = 0
+[node name="PanelScoreLabel" type="Label" parent="TopLeftControl"]
 offset_left = 8.0
 offset_right = 56.0
 offset_bottom = 64.0
@@ -47,13 +51,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_t3pwj")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="TopLeftControl"]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TopLeftControl/Node2D"]
 position = Vector2(72, 32)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kns1x")
 
-[connection signal="max_points_change" from="." to="PanelScoreLabel" method="_on_score_panel_2_max_points_change"]
-[connection signal="points_change" from="." to="PanelScoreLabel" method="_on_score_panel_2_points_change"]
-[connection signal="scene_time_elapsed_change" from="." to="PanelTimerLabel" method="_on_score_panel_scene_time_elapsed_change"]
+[connection signal="max_points_change" from="." to="TopLeftControl/PanelScoreLabel" method="_on_score_panel_max_points_change"]
+[connection signal="points_change" from="." to="TopLeftControl/PanelScoreLabel" method="_on_score_panel_points_change"]
+[connection signal="scene_time_elapsed_change" from="." to="TopLeftControl/PanelTimerLabel" method="_on_score_panel_scene_time_elapsed_change"]

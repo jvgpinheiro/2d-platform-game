@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dm7r8j3go3gnw"]
+[gd_scene load_steps=16 format=3 uid="uid://dm7r8j3go3gnw"]
 
 [ext_resource type="Texture2D" uid="uid://b538hu4e1qf7d" path="res://Green.png" id="1_ru2ku"]
 [ext_resource type="Texture2D" uid="uid://rop2et5gu55l" path="res://Terrain (16x16).png" id="2_5up2i"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://game_manager.gd" id="5_as1b3"]
 [ext_resource type="PackedScene" uid="uid://i12jx2k7s6ho" path="res://scenes/score_panel.tscn" id="8_nnb78"]
 [ext_resource type="PackedScene" uid="uid://bo0yfxoqc5kxu" path="res://scenes/scene_over_panel.tscn" id="9_ehigv"]
+[ext_resource type="PackedScene" uid="uid://duqwowblg5j1u" path="res://scenes/pause_panel.tscn" id="10_b3an8"]
 
 [sub_resource type="GDScript" id="GDScript_foxnp"]
 script/source = "extends Node
@@ -777,6 +778,9 @@ sources/0 = SubResource("TileSetAtlasSource_xy4ks")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_io6mg"]
 bg_color = Color(0.0980392, 0.0784314, 0.156863, 0.784314)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cbd4"]
+bg_color = Color(0.0980392, 0.0784314, 0.156863, 0.784314)
+
 [node name="Node" type="Node"]
 
 [node name="GameManager" type="Node" parent="."]
@@ -875,13 +879,19 @@ position = Vector2(2109, 424)
 visible = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_io6mg")
 
+[node name="PausePanel" parent="UI" instance=ExtResource("10_b3an8")]
+visible = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_3cbd4")
+
 [connection signal="on_max_points_changed" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_max_points_changed"]
 [connection signal="on_points_changed" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_points_changed"]
 [connection signal="on_scene_time_elapsed_change" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_scene_time_elapsed_change"]
 [connection signal="on_total_time_elapsed_change" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_total_time_elapsed_change"]
 [connection signal="paused" from="GameManager" to="Main Scene/FrogMC" method="_on_game_manager_paused"]
+[connection signal="paused" from="GameManager" to="UI/PausePanel" method="_on_game_manager_paused"]
 [connection signal="personal_best_updated" from="GameManager" to="UI/SceneOverPanel" method="_on_game_manager_personal_best_updated"]
 [connection signal="resumed" from="GameManager" to="Main Scene/FrogMC" method="_on_game_manager_resumed"]
+[connection signal="resumed" from="GameManager" to="UI/PausePanel" method="_on_game_manager_resumed"]
 [connection signal="scene_finished" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_scene_finished"]
 [connection signal="scene_finished" from="GameManager" to="UI/SceneOverPanel" method="_on_game_manager_scene_finished"]
 [connection signal="timeout" from="GameManager/FinishedSceneTimer" to="GameManager" method="_on_finished_scene_timer_timeout"]

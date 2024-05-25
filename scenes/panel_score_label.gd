@@ -7,13 +7,13 @@ func _ready():
 	update_score_text()
 
 
-func _on_score_panel_2_max_points_change(updated_max_points):
-	max_points = updated_max_points
+func _on_score_panel_points_change(updated_points):
+	points = updated_points
 	update_score_text()
 
 
-func _on_score_panel_2_points_change(updated_points):
-	points = updated_points
+func _on_score_panel_max_points_change(updated_max_points):
+	max_points = updated_max_points
 	update_score_text()
 
 
