@@ -4,13 +4,11 @@ extends Panel
 @onready var game_manager = %GameManager
 
 
-func _on_game_manager_paused():
-	if game_manager.is_finished:
-		return
+func _on_game_manager_paused_with_menu():
 	visible = true
 
 
-func _on_game_manager_resumed():
+func _on_game_manager_delayed_resume_started():
 	visible = false
 
 

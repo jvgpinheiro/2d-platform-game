@@ -9,11 +9,10 @@ const JUMP_VELOCITY = -800.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var currentJumps = 0
-var isPaused = false
 
 func _physics_process(delta):
 	handle_global_actions()
-	if isPaused:
+	if game_manager.is_paused:
 		sprite_2d.stop()
 		return
 	handle_movement(delta)
@@ -27,7 +26,7 @@ func handle_global_actions():
 	elif Input.is_action_just_pressed('finish_scene'):
 		game_manager.finish_scene()
 	elif Input.is_action_just_pressed('pause'):
-		game_manager.pause()
+		game_manager.pause_with_menu()
 	elif Input.is_action_just_pressed('resume'):
 		game_manager.resume()
 
@@ -69,19 +68,3 @@ func choose_animation_direction():
 	if velocity.x == 0:
 		isLeft = sprite_2d.flip_h
 	sprite_2d.flip_h = isLeft
-
-
-func pause():
-	isPaused = true
-
-
-func resume():
-	isPaused = false
-
-
-func _on_game_manager_paused():
-	pause()
-
-
-func _on_game_manager_resumed():
-	resume()

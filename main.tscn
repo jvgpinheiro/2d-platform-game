@@ -805,6 +805,10 @@ one_shot = true
 wait_time = 0.6
 one_shot = true
 
+[node name="ResumeTimer" type="Timer" parent="GameManager"]
+wait_time = 3.0
+one_shot = true
+
 [node name="Main Scene" type="Node" parent="."]
 script = SubResource("GDScript_foxnp")
 
@@ -883,16 +887,17 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_io6mg")
 visible = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_3cbd4")
 
+[connection signal="delayed_resume_started" from="GameManager" to="UI/PausePanel" method="_on_game_manager_delayed_resume_started"]
 [connection signal="on_max_points_changed" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_max_points_changed"]
 [connection signal="on_points_changed" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_points_changed"]
 [connection signal="on_scene_time_elapsed_change" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_scene_time_elapsed_change"]
 [connection signal="on_total_time_elapsed_change" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_on_total_time_elapsed_change"]
 [connection signal="paused" from="GameManager" to="Main Scene/FrogMC" method="_on_game_manager_paused"]
-[connection signal="paused" from="GameManager" to="UI/PausePanel" method="_on_game_manager_paused"]
+[connection signal="paused_with_menu" from="GameManager" to="UI/PausePanel" method="_on_game_manager_paused_with_menu"]
 [connection signal="personal_best_updated" from="GameManager" to="UI/SceneOverPanel" method="_on_game_manager_personal_best_updated"]
 [connection signal="resumed" from="GameManager" to="Main Scene/FrogMC" method="_on_game_manager_resumed"]
-[connection signal="resumed" from="GameManager" to="UI/PausePanel" method="_on_game_manager_resumed"]
 [connection signal="scene_finished" from="GameManager" to="UI/ScorePanel" method="_on_game_manager_scene_finished"]
 [connection signal="scene_finished" from="GameManager" to="UI/SceneOverPanel" method="_on_game_manager_scene_finished"]
 [connection signal="timeout" from="GameManager/FinishedSceneTimer" to="GameManager" method="_on_finished_scene_timer_timeout"]
 [connection signal="timeout" from="GameManager/FinishedGameTimer" to="GameManager" method="_on_finished_game_timer_timeout"]
+[connection signal="timeout" from="GameManager/ResumeTimer" to="GameManager" method="_on_resume_timer_timeout"]

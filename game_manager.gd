@@ -6,20 +6,25 @@ signal on_total_time_elapsed_change(time_elapsed: float, formatted_time_elapsed:
 signal on_scene_time_elapsed_change(time_elapsed: float, formatted_time_elapsed: String)
 signal scene_finished(result: Dictionary)
 signal game_finished(results: Array[Dictionary])
+signal started()
 signal paused()
+signal paused_with_menu()
 signal resumed()
+signal delayed_resume_started()
 signal game_saved()
 signal game_loaded(data: Dictionary)
 signal personal_best_updated(data: Dictionary)
 
 @onready var finished_scene_timer = $FinishedSceneTimer
 @onready var finished_game_timer = $FinishedGameTimer
+@onready var resume_timer = $ResumeTimer
+@onready var start_timer = $StartTimer
 var points = 0
 var max_points = 0
 var total_time_elapsed = 0
 var scene_time_elapsed = 0
+var is_paused = false
 var is_finished = false
-var isPaused = false
 var finished_scenes_results = []
 var pausable_group_name = "pausable"
 var personal_best = INF
@@ -29,6 +34,8 @@ var save_game_path = save_game_dir_path + '/save_game.save'
 func _ready():
 	disable_mouse()
 	load_game()
+	pause()
+	resume()
 
 
 func is_game_finished():
@@ -122,14 +129,20 @@ func format_time_elapsed(time):
 
 
 func pause():
+	is_paused = true
 	paused.emit()
 	get_tree().call_group(pausable_group_name, "_on_game_manager_paused")
 	enable_mouse()
 
 
+func pause_with_menu():
+	pause()
+	paused_with_menu.emit()
+
+
 func resume():
-	resumed.emit()
-	get_tree().call_group(pausable_group_name, "_on_game_manager_resumed")
+	delayed_resume_started.emit()
+	resume_timer.start()
 	disable_mouse()
 
 
@@ -236,3 +249,9 @@ func _on_finished_scene_timer_timeout():
 func _on_finished_game_timer_timeout():
 	pause()
 	game_finished.emit(finished_scenes_results)
+
+
+func _on_resume_timer_timeout():
+	is_paused = false
+	resumed.emit()
+	get_tree().call_group(pausable_group_name, "_on_game_manager_resumed")
