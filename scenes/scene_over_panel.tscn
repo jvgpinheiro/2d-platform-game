@@ -95,24 +95,170 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_dmugi")
 
-[node name="Trophy" type="Node2D" parent="."]
-position = Vector2(632, 140)
+[node name="TopLeftControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PersonalBest" type="Node2D" parent="TopLeftControl"]
+position = Vector2(16, 16)
+script = ExtResource("11_wrvur")
+
+[node name="DescriptionLabel" type="Label" parent="TopLeftControl/PersonalBest"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Personal Best"
+
+[node name="Sprite2D" type="Sprite2D" parent="TopLeftControl/PersonalBest"]
+position = Vector2(30, 35)
+scale = Vector2(0.0303468, 0.0303468)
+texture = ExtResource("7_8ldum")
+
+[node name="TimeLabel" type="Label" parent="TopLeftControl/PersonalBest"]
+offset_left = 64.0
+offset_top = 24.0
+offset_right = 105.0
+offset_bottom = 47.0
+text = "59:59"
+
+[node name="TopRightControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="RatingsPerTimeList" type="Node2D" parent="TopRightControl"]
+position = Vector2(-104, 16)
+
+[node name="FiveStarsTimeRating" type="Node2D" parent="TopRightControl/RatingsPerTimeList"]
+position = Vector2(87, 15)
+
+[node name="Sprite2D" type="Sprite2D" parent="TopRightControl/RatingsPerTimeList/FiveStarsTimeRating"]
+scale = Vector2(0.046, 0.046)
+texture = ExtResource("6_c0ffg")
+
+[node name="Label" type="Label" parent="TopRightControl/RatingsPerTimeList/FiveStarsTimeRating"]
+offset_left = -96.0
+offset_top = -8.0
+offset_right = -50.0
+offset_bottom = 9.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+text = "00:20"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="FourStarsTimeRating" type="Node2D" parent="TopRightControl/RatingsPerTimeList"]
+position = Vector2(87, 39)
+
+[node name="Sprite2D" type="Sprite2D" parent="TopRightControl/RatingsPerTimeList/FourStarsTimeRating"]
+scale = Vector2(0.046, 0.046)
+texture = ExtResource("10_uvp1x")
+
+[node name="Label" type="Label" parent="TopRightControl/RatingsPerTimeList/FourStarsTimeRating"]
+offset_left = -96.0
+offset_top = -8.0
+offset_right = -50.0
+offset_bottom = 9.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+text = "00:27"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ThreeStarsTimeRating" type="Node2D" parent="TopRightControl/RatingsPerTimeList"]
+position = Vector2(87, 63)
+
+[node name="Sprite2D" type="Sprite2D" parent="TopRightControl/RatingsPerTimeList/ThreeStarsTimeRating"]
+scale = Vector2(0.046, 0.046)
+texture = ExtResource("9_76q4m")
+
+[node name="Label" type="Label" parent="TopRightControl/RatingsPerTimeList/ThreeStarsTimeRating"]
+offset_left = -96.0
+offset_top = -8.0
+offset_right = -50.0
+offset_bottom = 9.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+text = "00:38"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TwoStarsTimeRating" type="Node2D" parent="TopRightControl/RatingsPerTimeList"]
+position = Vector2(87, 87)
+
+[node name="Sprite2D" type="Sprite2D" parent="TopRightControl/RatingsPerTimeList/TwoStarsTimeRating"]
+scale = Vector2(0.046, 0.046)
+texture = ExtResource("8_uo4r2")
+
+[node name="Label" type="Label" parent="TopRightControl/RatingsPerTimeList/TwoStarsTimeRating"]
+offset_left = -96.0
+offset_top = -8.0
+offset_right = -50.0
+offset_bottom = 9.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+text = "00:52"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="OneStarTimeRating" type="Node2D" parent="TopRightControl/RatingsPerTimeList"]
+position = Vector2(87, 111)
+
+[node name="Sprite2D" type="Sprite2D" parent="TopRightControl/RatingsPerTimeList/OneStarTimeRating"]
+position = Vector2(-1.52588e-05, -3.8147e-06)
+scale = Vector2(0.0462428, 0.0462428)
+texture = ExtResource("7_8ldum")
+
+[node name="Label" type="Label" parent="TopRightControl/RatingsPerTimeList/OneStarTimeRating"]
+offset_left = -96.0
+offset_top = -8.0
+offset_right = -50.0
+offset_bottom = 9.0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
+text = "Finish"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="CenterControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Trophy" type="Node2D" parent="CenterControl"]
+position = Vector2(28, -160)
 script = ExtResource("2_1hcxi")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Trophy"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CenterControl/Trophy"]
 position = Vector2(0, -32)
 scale = Vector2(3.25, 3.25)
 sprite_frames = SubResource("SpriteFrames_2v6qo")
 animation = &"complete"
 frame_progress = 0.579719
 
-[node name="Rating" type="Node2D" parent="."]
-position = Vector2(628, 480)
+[node name="Rating" type="Node2D" parent="CenterControl"]
+position = Vector2(20, 176)
 script = ExtResource("5_h7bf7")
 
-[node name="TimeLabel" type="Label" parent="Rating"]
+[node name="TimeLabel" type="Label" parent="CenterControl/Rating"]
 offset_left = -48.0
 offset_top = -48.0
 offset_right = 48.0
@@ -124,12 +270,12 @@ text = "00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="Rating"]
+[node name="Sprite2D" type="Sprite2D" parent="CenterControl/Rating"]
 position = Vector2(0, 32)
 scale = Vector2(0.150146, 0.150146)
 texture = ExtResource("6_c0ffg")
 
-[node name="NewRecordLabel" type="Label" parent="Rating"]
+[node name="NewRecordLabel" type="Label" parent="CenterControl/Rating"]
 visible = false
 anchors_preset = 7
 anchor_left = 0.5
@@ -147,123 +293,8 @@ theme_override_font_sizes/font_size = 20
 text = "NEW RECORD!!!"
 script = ExtResource("7_noog3")
 
-[node name="Timer" type="Timer" parent="Rating/NewRecordLabel"]
+[node name="Timer" type="Timer" parent="CenterControl/Rating/NewRecordLabel"]
 wait_time = 0.5
 one_shot = true
 
-[node name="RatingsPerTimeList" type="Node2D" parent="."]
-position = Vector2(-8, 0)
-
-[node name="FiveStarsTimeRating" type="Node2D" parent="RatingsPerTimeList"]
-position = Vector2(1192, 40)
-
-[node name="Sprite2D" type="Sprite2D" parent="RatingsPerTimeList/FiveStarsTimeRating"]
-scale = Vector2(0.046, 0.046)
-texture = ExtResource("6_c0ffg")
-
-[node name="Label" type="Label" parent="RatingsPerTimeList/FiveStarsTimeRating"]
-offset_left = -96.0
-offset_top = -8.0
-offset_right = -50.0
-offset_bottom = 9.0
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 12
-text = "00:20"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="FourStarsTimeRating" type="Node2D" parent="RatingsPerTimeList"]
-position = Vector2(1192, 64)
-
-[node name="Sprite2D" type="Sprite2D" parent="RatingsPerTimeList/FourStarsTimeRating"]
-scale = Vector2(0.046, 0.046)
-texture = ExtResource("10_uvp1x")
-
-[node name="Label" type="Label" parent="RatingsPerTimeList/FourStarsTimeRating"]
-offset_left = -96.0
-offset_top = -8.0
-offset_right = -50.0
-offset_bottom = 9.0
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 12
-text = "00:27"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="ThreeStarsTimeRating" type="Node2D" parent="RatingsPerTimeList"]
-position = Vector2(1192, 88)
-
-[node name="Sprite2D" type="Sprite2D" parent="RatingsPerTimeList/ThreeStarsTimeRating"]
-scale = Vector2(0.046, 0.046)
-texture = ExtResource("9_76q4m")
-
-[node name="Label" type="Label" parent="RatingsPerTimeList/ThreeStarsTimeRating"]
-offset_left = -96.0
-offset_top = -8.0
-offset_right = -50.0
-offset_bottom = 9.0
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 12
-text = "00:38"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="TwoStarsTimeRating" type="Node2D" parent="RatingsPerTimeList"]
-position = Vector2(1192, 112)
-
-[node name="Sprite2D" type="Sprite2D" parent="RatingsPerTimeList/TwoStarsTimeRating"]
-scale = Vector2(0.046, 0.046)
-texture = ExtResource("8_uo4r2")
-
-[node name="Label" type="Label" parent="RatingsPerTimeList/TwoStarsTimeRating"]
-offset_left = -96.0
-offset_top = -8.0
-offset_right = -50.0
-offset_bottom = 9.0
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 12
-text = "00:52"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="OneStarTimeRating" type="Node2D" parent="RatingsPerTimeList"]
-position = Vector2(1192, 136)
-
-[node name="Sprite2D" type="Sprite2D" parent="RatingsPerTimeList/OneStarTimeRating"]
-position = Vector2(-1.52588e-05, -3.8147e-06)
-scale = Vector2(0.0462428, 0.0462428)
-texture = ExtResource("7_8ldum")
-
-[node name="Label" type="Label" parent="RatingsPerTimeList/OneStarTimeRating"]
-offset_left = -96.0
-offset_top = -8.0
-offset_right = -50.0
-offset_bottom = 9.0
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 12
-text = "Finish"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="PersonalBest" type="Node2D" parent="."]
-position = Vector2(16, 16)
-script = ExtResource("11_wrvur")
-
-[node name="DescriptionLabel" type="Label" parent="PersonalBest"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Personal Best"
-
-[node name="Sprite2D" type="Sprite2D" parent="PersonalBest"]
-position = Vector2(30, 35)
-scale = Vector2(0.0303468, 0.0303468)
-texture = ExtResource("7_8ldum")
-
-[node name="TimeLabel" type="Label" parent="PersonalBest"]
-offset_left = 64.0
-offset_top = 24.0
-offset_right = 105.0
-offset_bottom = 47.0
-text = "59:59"
-
-[connection signal="timeout" from="Rating/NewRecordLabel/Timer" to="Rating/NewRecordLabel" method="_on_timer_timeout"]
+[connection signal="timeout" from="CenterControl/Rating/NewRecordLabel/Timer" to="CenterControl/Rating/NewRecordLabel" method="_on_timer_timeout"]

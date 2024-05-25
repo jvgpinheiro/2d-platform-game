@@ -27,6 +27,7 @@ var save_game_dir_path = 'user://saves/'
 var save_game_path = save_game_dir_path + '/save_game.save'
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	load_game()
 
 func add_max_points():
