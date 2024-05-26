@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://dm7r8j3go3gnw"]
+[gd_scene load_steps=18 format=3 uid="uid://dm7r8j3go3gnw"]
 
 [ext_resource type="Texture2D" uid="uid://b538hu4e1qf7d" path="res://Green.png" id="1_ru2ku"]
 [ext_resource type="Texture2D" uid="uid://rop2et5gu55l" path="res://Terrain (16x16).png" id="2_5up2i"]
 [ext_resource type="Script" path="res://game_manager/fake_total_timer.gd" id="2_hmivs"]
 [ext_resource type="PackedScene" uid="uid://df21gkfda6ime" path="res://scenes/main_character.tscn" id="3_70fkn"]
 [ext_resource type="Script" path="res://game_manager/fake_scene_timer.gd" id="3_wohdg"]
+[ext_resource type="AudioStream" uid="uid://bburylqxiy4mk" path="res://time_for_adventure.mp3" id="4_8o6jh"]
 [ext_resource type="PackedScene" uid="uid://bs136v7ule683" path="res://scenes/cherry.tscn" id="4_bayay"]
 [ext_resource type="Script" path="res://game_manager.gd" id="5_as1b3"]
 [ext_resource type="PackedScene" uid="uid://i12jx2k7s6ho" path="res://scenes/score_panel.tscn" id="8_nnb78"]
@@ -812,6 +813,11 @@ one_shot = true
 
 [node name="Main Scene" type="Node" parent="."]
 script = SubResource("GDScript_foxnp")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Main Scene"]
+stream = ExtResource("4_8o6jh")
+volume_db = -7.0
+autoplay = true
 
 [node name="TextureRect" type="TextureRect" parent="Main Scene"]
 texture_filter = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://df21gkfda6ime"]
+[gd_scene load_steps=41 format=3 uid="uid://df21gkfda6ime"]
 
 [ext_resource type="Script" path="res://scenes/main_character.gd" id="1_6ygkx"]
 [ext_resource type="Texture2D" uid="uid://rige0vfeqatv" path="res://Double Jump (32x32).png" id="2_128y0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://lhl0hisksdh8" path="res://Idle (32x32).png" id="4_ykat1"]
 [ext_resource type="Texture2D" uid="uid://d31mf7pqk31kk" path="res://Jump (32x32).png" id="5_kpan3"]
 [ext_resource type="Texture2D" uid="uid://dg4l4clf1vnp5" path="res://Run (32x32).png" id="5_plv2j"]
+[ext_resource type="AudioStream" uid="uid://dbwbvb4j6betj" path="res://jump.wav" id="7_w8dhd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_21hjs"]
 atlas = ExtResource("2_128y0")
@@ -269,3 +270,8 @@ frame = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 10.5)
 shape = SubResource("RectangleShape2D_lv3ho")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_w8dhd")
+volume_db = -28.0
+pitch_scale = 1.28

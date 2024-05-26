@@ -2,7 +2,7 @@ extends Area2D
 @onready var sprite_2d = $AnimatedSprite2D
 @onready var timer = $Timer
 @onready var game_manager = %GameManager
-
+@onready var audio_stream = $AudioStreamPlayer
 var is_destroying = false
 var time_left_to_destroy = 0.3
 
@@ -44,6 +44,7 @@ func _on_body_entered(body):
 		is_destroying = true
 		game_manager.add_point()
 		sprite_2d.play("collected")
+		audio_stream.play()
 		timer.start()
 
 

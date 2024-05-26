@@ -149,7 +149,6 @@ func resume():
 func finish_scene():
 	if is_finished:
 		return
-	var accumlated_time_elapsed = total_time_elapsed
 	var stars_rating = get_scene_star_rating(scene_time_elapsed)
 	var is_new_personal_best = is_inf(personal_best) || scene_time_elapsed < personal_best
 	if is_new_personal_best:
@@ -212,18 +211,18 @@ func save_game():
 	}
 	if not DirAccess.dir_exists_absolute(save_game_dir_path):
 		DirAccess.make_dir_absolute(save_game_dir_path)
-	var save_game = FileAccess.open(save_game_path, FileAccess.WRITE)
+	var save_game_file = FileAccess.open(save_game_path, FileAccess.WRITE)
 	var json_save_data = JSON.stringify(save_data)
-	save_game.store_line(json_save_data)
-	save_game.close()
+	save_game_file.store_line(json_save_data)
+	save_game_file.close()
 	game_saved.emit()
 
 
 func load_game():
 	if not FileAccess.file_exists(save_game_path):
 		return
-	var save_game = FileAccess.open(save_game_path, FileAccess.READ)
-	var json_string = save_game.get_line()
+	var save_game_file = FileAccess.open(save_game_path, FileAccess.READ)
+	var json_string = save_game_file.get_line()
 	var json = JSON.new()
 	var parse_result = json.parse(json_string)
 	if parse_result != OK:
@@ -232,7 +231,7 @@ func load_game():
 	if save_data.personal_best:
 		personal_best = save_data.personal_best
 		personal_best_updated.emit()
-	save_game.close()
+	save_game_file.close()
 	game_loaded.emit(save_data)
 
 

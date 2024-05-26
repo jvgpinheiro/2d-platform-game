@@ -1,8 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://bs136v7ule683"]
+[gd_scene load_steps=30 format=3 uid="uid://bs136v7ule683"]
 
 [ext_resource type="Script" path="res://scenes/cherry.gd" id="1_qmohw"]
 [ext_resource type="Texture2D" uid="uid://do4rekagc4c0c" path="res://Cherries.png" id="2_20i3e"]
 [ext_resource type="Texture2D" uid="uid://c8on4g3qjhhqu" path="res://Collected.png" id="2_s2knx"]
+[ext_resource type="AudioStream" uid="uid://ddovu28qtnb6u" path="res://collect_fruit.mp3" id="4_lacjg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4jkqa"]
 atlas = ExtResource("2_s2knx")
@@ -188,7 +189,7 @@ script = ExtResource("1_qmohw")
 position = Vector2(7.7486e-07, -0.499997)
 scale = Vector2(2.9375, 2.90625)
 sprite_frames = SubResource("SpriteFrames_l6a5o")
-animation = &"collected"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lyu53")
@@ -196,6 +197,10 @@ shape = SubResource("CircleShape2D_lyu53")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_lacjg")
+volume_db = 2.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
